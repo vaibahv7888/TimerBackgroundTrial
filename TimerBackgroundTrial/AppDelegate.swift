@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    var manager = CLLocationManager()
+    var timer = Timer()
 
     let backgroundTaskName = "backgroundTaskName"
     var backgroundTaskId : UIBackgroundTaskIdentifier?
@@ -21,14 +24,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.requestAlwaysAuthorization()
+        
+        if #available(iOS 9.0, *) {
+            manager.allowsBackgroundLocationUpdates = true
+        } else {
+            // Fallback on earlier versions
+        }
+        
         startTimer()
+        
+        manager.startUpdatingLocation()
+        
         return true
     }
 
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        if(!timer.isValid) {
+            timer.invalidate()
+            self.counter = 0;
+            startTimer()
+            print("In Location update INVALID TIMER")
+            println(s: "Starting timer from Location Update")
+        }
+        let currentLocation = locations.first
+        print("Current Location Lat = \(String(describing: currentLocation?.coordinate.latitude))")
+        print("Current Location Long = \(String(describing: currentLocation?.coordinate.longitude))")
+        print("timer isValid= \(timer.isValid)")
+        println(s: "timer isValid= \(timer.isValid)")
+        println(s:"Current Location Lat = \(String(describing: currentLocation?.coordinate.latitude))")
+        println(s:"Current Location Long = \(String(describing: currentLocation?.coordinate.longitude))")
+    }
+    
     func startTimer() {
         if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
+            timer = Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
                 self.counter += 1
+                if(self.counter == 1) {
+                    self.logFileName = "\(self.getCurrentTime()).txt"
+                }
                 print("Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
                 self.println(s: "Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
             }
@@ -40,15 +77,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func println(s:String) {
         var dump = ""
         if(self.counter == 1) {
-            logFileName = "\(getCurrentTime()).txt"
-            dump = getCurrentTime()
+            dump = "\(getCurrentTime())"
         }
         
         let paths: NSArray = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
         let documentsDirectory: NSString = paths[0] as! NSString
         let logPath: NSString = documentsDirectory.appendingPathComponent(logFileName) as NSString
         let path = logPath
-        
+
         if FileManager.default.fileExists(atPath: path as String) {
             dump =  try! String(contentsOfFile: path as String, encoding: String.Encoding.utf8)
         }
@@ -83,6 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         print("applicationDidEnterBackground")
+        manager.startMonitoringSignificantLocationChanges()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
