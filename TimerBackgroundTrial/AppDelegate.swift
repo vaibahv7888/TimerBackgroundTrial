@@ -17,21 +17,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTaskId : UIBackgroundTaskIdentifier?
     var counter : Int = 0
     let timerIntervalSeconds : Int = 10
+    var logFileName = "log.txt"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        startTimer()
+        return true
+    }
+
+    func startTimer() {
         if #available(iOS 10.0, *) {
             Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
                 self.counter += 1
                 print("Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
+                self.println(s: "Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
             }
         } else {
             // Fallback on earlier versions
         }
-        
-        return true
     }
-
+    
+    func println(s:String) {
+        var dump = ""
+        if(self.counter == 1) {
+            logFileName = "\(getCurrentTime()).txt"
+            dump = getCurrentTime()
+        }
+        
+        let paths: NSArray = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
+        let documentsDirectory: NSString = paths[0] as! NSString
+        let logPath: NSString = documentsDirectory.appendingPathComponent(logFileName) as NSString
+        let path = logPath
+        
+        if FileManager.default.fileExists(atPath: path as String) {
+            dump =  try! String(contentsOfFile: path as String, encoding: String.Encoding.utf8)
+        }
+        do {
+            // Write to the file
+            try  "\(dump)\n\(s)".write(toFile: path as String, atomically: true, encoding: String.Encoding.utf8)
+            
+        } catch let error as NSError {
+            print("Failed writing to log file: \(path), Error: " + error.localizedDescription)
+        }
+    }
+    
+    func getCurrentTime() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH.mm.ss"    //"HH.mm dd.MM.yyyy"
+        let result = formatter.string(from: date)
+        return result
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         print("applicationWillResignActive")
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

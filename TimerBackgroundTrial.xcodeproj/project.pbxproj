@@ -96,8 +96,13 @@
 				TargetAttributes = {
 					BD7E49AC1E9FA3AD00E59D9A = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 4GB7ELR75Z;
+						DevelopmentTeam = J8PVMCY7KL;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -263,7 +268,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4GB7ELR75Z;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
 				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lukya.TimerBackgroundTrial;
@@ -276,7 +281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4GB7ELR75Z;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
 				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lukya.TimerBackgroundTrial;
