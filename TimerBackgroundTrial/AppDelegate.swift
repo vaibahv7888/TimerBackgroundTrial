@@ -24,8 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+       
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+       manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         manager.requestAlwaysAuthorization()
         
@@ -41,7 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         return true
     }
-
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if(!timer.isValid) {
+            timer.invalidate()
+            self.counter = 0;
+            startTimer()
+            print("In background fetch update INVALID TIMER")
+            println(s: "Starting timer from background fetch")
+        }
+        print("In backgroud fetch valid TIMER")
+        println(s: "in background fetch")
+        completionHandler(.newData)
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         if(!timer.isValid) {
             timer.invalidate()
