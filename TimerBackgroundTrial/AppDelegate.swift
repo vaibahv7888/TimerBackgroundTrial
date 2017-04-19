@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Override point for customization after application launch.
        
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-       manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         manager.requestAlwaysAuthorization()
         
@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         return true
     }
+    
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if(!timer.isValid) {
             timer.invalidate()
@@ -54,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         println(s: "in background fetch")
         completionHandler(.newData)
     }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         if(!timer.isValid) {
             timer.invalidate()
@@ -73,11 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func startTimer() {
         if #available(iOS 10.0, *) {
+            if(self.counter == 0) {
+                self.logFileName = "\(self.getCurrentTime()).txt"
+                println(s: "Started At Time: \(self.getCurrentTime())")
+            }
             timer = Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
                 self.counter += 1
-                if(self.counter == 1) {
-                    self.logFileName = "\(self.getCurrentTime()).txt"
-                }
                 print("Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
                 self.println(s: "Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
             }
@@ -88,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func println(s:String) {
         var dump = ""
-        if(self.counter == 1) {
+        if(self.counter == 0) {
             dump = "\(getCurrentTime())"
         }
         
