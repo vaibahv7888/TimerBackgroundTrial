@@ -52,10 +52,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //            print("In background fetch update INVALID TIMER")
 //            println(s: "Starting timer from background fetch")
 //        }
+
+        print("In backgroud fetch")
+        let urlSession = URLSession.shared
+
+        let task : URLSessionDataTask = urlSession.dataTask(with: URL(string: "https://jsonplaceholder.typicode.com/posts/1")!) { (data, response, error) in
+            var logData = "Background fetch"
+            var fetchResult : UIBackgroundFetchResult = .noData
+            if let downloadError = error {
+                print("Downloaded error : \(downloadError)")
+                logData = logData + " | Error : " + downloadError.localizedDescription
+                fetchResult = .failed
+            }
+            else if let downloadedData = data {
+                print("Downloaded data : \(downloadedData)")
+                logData = logData + " | Data : \(downloadedData)"
+                fetchResult = .newData
+            }
+            else {
+                print("No data")
+                logData = logData + " | No data"
+            }
+            self.println(s: "\(self.getCurrentTime()) | \(logData)")
+            completionHandler(fetchResult)
+        }
+        task.resume()
         
-//        print("In backgroud fetch valid TIMER")
-        println(s: "\(getCurrentTime()) | Background fetch")
-        completionHandler(.newData)
     }
     
     
@@ -170,7 +192,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("applicationDidEnterBackground")
-        getLocationManager().startMonitoringSignificantLocationChanges()
+        #if BGLOC
+            getLocationManager().startMonitoringSignificantLocationChanges()
+        #endif
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
