@@ -12,20 +12,59 @@
 		BD7E49B61E9FA3AD00E59D9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B41E9FA3AD00E59D9A /* Main.storyboard */; };
 		BD7E49B81E9FA3AD00E59D9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B71E9FA3AD00E59D9A /* Assets.xcassets */; };
 		BD7E49BB1E9FA3AD00E59D9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B91E9FA3AD00E59D9A /* LaunchScreen.storyboard */; };
+		BD82A14D1EA89F12001A52A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */; };
+		BD82A14E1EA89F12001A52A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */; };
+		BD82A1511EA89F12001A52A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B91E9FA3AD00E59D9A /* LaunchScreen.storyboard */; };
+		BD82A1521EA89F12001A52A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B71E9FA3AD00E59D9A /* Assets.xcassets */; };
+		BD82A1531EA89F12001A52A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B41E9FA3AD00E59D9A /* Main.storyboard */; };
+		BD82A15B1EA89F15001A52A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */; };
+		BD82A15C1EA89F15001A52A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */; };
+		BD82A15F1EA89F15001A52A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B91E9FA3AD00E59D9A /* LaunchScreen.storyboard */; };
+		BD82A1601EA89F15001A52A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B71E9FA3AD00E59D9A /* Assets.xcassets */; };
+		BD82A1611EA89F15001A52A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B41E9FA3AD00E59D9A /* Main.storyboard */; };
+		BD82A1691EA89F1F001A52A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */; };
+		BD82A16A1EA89F1F001A52A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */; };
+		BD82A16D1EA89F1F001A52A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B91E9FA3AD00E59D9A /* LaunchScreen.storyboard */; };
+		BD82A16E1EA89F1F001A52A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B71E9FA3AD00E59D9A /* Assets.xcassets */; };
+		BD82A16F1EA89F1F001A52A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B41E9FA3AD00E59D9A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BD7E49AD1E9FA3AD00E59D9A /* TimerBackgroundTrial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerBackgroundTrial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD7E49AD1E9FA3AD00E59D9A /* BGTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BGTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BD7E49B51E9FA3AD00E59D9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD7E49B71E9FA3AD00E59D9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD7E49BA1E9FA3AD00E59D9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD7E49BC1E9FA3AD00E59D9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD82A1571EA89F12001A52A6 /* BGTimer-Fetch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BGTimer-Fetch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD82A1651EA89F15001A52A6 /* BGTimer-BLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BGTimer-BLE.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD82A1731EA89F1F001A52A6 /* BGTImer-Loc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BGTImer-Loc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BD7E49AA1E9FA3AD00E59D9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A14F1EA89F12001A52A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A15D1EA89F15001A52A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A16B1EA89F1F001A52A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,7 +85,10 @@
 		BD7E49AE1E9FA3AD00E59D9A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BD7E49AD1E9FA3AD00E59D9A /* TimerBackgroundTrial.app */,
+				BD7E49AD1E9FA3AD00E59D9A /* BGTimer.app */,
+				BD82A1571EA89F12001A52A6 /* BGTimer-Fetch.app */,
+				BD82A1651EA89F15001A52A6 /* BGTimer-BLE.app */,
+				BD82A1731EA89F1F001A52A6 /* BGTImer-Loc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +109,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BD7E49AC1E9FA3AD00E59D9A /* TimerBackgroundTrial */ = {
+		BD7E49AC1E9FA3AD00E59D9A /* BGTimer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BD7E49BF1E9FA3AD00E59D9A /* Build configuration list for PBXNativeTarget "TimerBackgroundTrial" */;
+			buildConfigurationList = BD7E49BF1E9FA3AD00E59D9A /* Build configuration list for PBXNativeTarget "BGTimer" */;
 			buildPhases = (
 				BD7E49A91E9FA3AD00E59D9A /* Sources */,
 				BD7E49AA1E9FA3AD00E59D9A /* Frameworks */,
@@ -79,9 +121,60 @@
 			);
 			dependencies = (
 			);
-			name = TimerBackgroundTrial;
+			name = BGTimer;
 			productName = TimerBackgroundTrial;
-			productReference = BD7E49AD1E9FA3AD00E59D9A /* TimerBackgroundTrial.app */;
+			productReference = BD7E49AD1E9FA3AD00E59D9A /* BGTimer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BD82A14B1EA89F12001A52A6 /* BGTimer-Fetch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD82A1541EA89F12001A52A6 /* Build configuration list for PBXNativeTarget "BGTimer-Fetch" */;
+			buildPhases = (
+				BD82A14C1EA89F12001A52A6 /* Sources */,
+				BD82A14F1EA89F12001A52A6 /* Frameworks */,
+				BD82A1501EA89F12001A52A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BGTimer-Fetch";
+			productName = TimerBackgroundTrial;
+			productReference = BD82A1571EA89F12001A52A6 /* BGTimer-Fetch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BD82A1591EA89F15001A52A6 /* BGTimer-BLE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD82A1621EA89F15001A52A6 /* Build configuration list for PBXNativeTarget "BGTimer-BLE" */;
+			buildPhases = (
+				BD82A15A1EA89F15001A52A6 /* Sources */,
+				BD82A15D1EA89F15001A52A6 /* Frameworks */,
+				BD82A15E1EA89F15001A52A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BGTimer-BLE";
+			productName = TimerBackgroundTrial;
+			productReference = BD82A1651EA89F15001A52A6 /* BGTimer-BLE.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BD82A1671EA89F1F001A52A6 /* BGTImer-Loc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD82A1701EA89F1F001A52A6 /* Build configuration list for PBXNativeTarget "BGTImer-Loc" */;
+			buildPhases = (
+				BD82A1681EA89F1F001A52A6 /* Sources */,
+				BD82A16B1EA89F1F001A52A6 /* Frameworks */,
+				BD82A16C1EA89F1F001A52A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BGTImer-Loc";
+			productName = TimerBackgroundTrial;
+			productReference = BD82A1731EA89F1F001A52A6 /* BGTImer-Loc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,6 +197,15 @@
 							};
 						};
 					};
+					BD82A14B1EA89F12001A52A6 = {
+						DevelopmentTeam = J8PVMCY7KL;
+					};
+					BD82A1591EA89F15001A52A6 = {
+						DevelopmentTeam = J8PVMCY7KL;
+					};
+					BD82A1671EA89F1F001A52A6 = {
+						DevelopmentTeam = J8PVMCY7KL;
+					};
 				};
 			};
 			buildConfigurationList = BD7E49A81E9FA3AD00E59D9A /* Build configuration list for PBXProject "TimerBackgroundTrial" */;
@@ -119,7 +221,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BD7E49AC1E9FA3AD00E59D9A /* TimerBackgroundTrial */,
+				BD7E49AC1E9FA3AD00E59D9A /* BGTimer */,
+				BD82A14B1EA89F12001A52A6 /* BGTimer-Fetch */,
+				BD82A1591EA89F15001A52A6 /* BGTimer-BLE */,
+				BD82A1671EA89F1F001A52A6 /* BGTImer-Loc */,
 			);
 		};
 /* End PBXProject section */
@@ -135,6 +240,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BD82A1501EA89F12001A52A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD82A1511EA89F12001A52A6 /* LaunchScreen.storyboard in Resources */,
+				BD82A1521EA89F12001A52A6 /* Assets.xcassets in Resources */,
+				BD82A1531EA89F12001A52A6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A15E1EA89F15001A52A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD82A15F1EA89F15001A52A6 /* LaunchScreen.storyboard in Resources */,
+				BD82A1601EA89F15001A52A6 /* Assets.xcassets in Resources */,
+				BD82A1611EA89F15001A52A6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A16C1EA89F1F001A52A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD82A16D1EA89F1F001A52A6 /* LaunchScreen.storyboard in Resources */,
+				BD82A16E1EA89F1F001A52A6 /* Assets.xcassets in Resources */,
+				BD82A16F1EA89F1F001A52A6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -144,6 +279,33 @@
 			files = (
 				BD7E49B31E9FA3AD00E59D9A /* ViewController.swift in Sources */,
 				BD7E49B11E9FA3AD00E59D9A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A14C1EA89F12001A52A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD82A14D1EA89F12001A52A6 /* ViewController.swift in Sources */,
+				BD82A14E1EA89F12001A52A6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A15A1EA89F15001A52A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD82A15B1EA89F15001A52A6 /* ViewController.swift in Sources */,
+				BD82A15C1EA89F15001A52A6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD82A1681EA89F1F001A52A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD82A1691EA89F1F001A52A6 /* ViewController.swift in Sources */,
+				BD82A16A1EA89F1F001A52A6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +452,90 @@
 			};
 			name = Release;
 		};
+		BD82A1551EA89F12001A52A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
+				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DBGFETCH";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ict.bgtimerfetch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		BD82A1561EA89F12001A52A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
+				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DBGFETCH";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ict.bgtimerfetch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		BD82A1631EA89F15001A52A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
+				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DBGBLE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ict.bgtimerble;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		BD82A1641EA89F15001A52A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
+				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DBGBLE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ict.bgtimerble;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		BD82A1711EA89F1F001A52A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
+				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DBGLOC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ict.bgtimerloc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		BD82A1721EA89F1F001A52A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J8PVMCY7KL;
+				INFOPLIST_FILE = TimerBackgroundTrial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DBGLOC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ict.bgtimerloc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -302,11 +548,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BD7E49BF1E9FA3AD00E59D9A /* Build configuration list for PBXNativeTarget "TimerBackgroundTrial" */ = {
+		BD7E49BF1E9FA3AD00E59D9A /* Build configuration list for PBXNativeTarget "BGTimer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BD7E49C01E9FA3AD00E59D9A /* Debug */,
 				BD7E49C11E9FA3AD00E59D9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD82A1541EA89F12001A52A6 /* Build configuration list for PBXNativeTarget "BGTimer-Fetch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD82A1551EA89F12001A52A6 /* Debug */,
+				BD82A1561EA89F12001A52A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD82A1621EA89F15001A52A6 /* Build configuration list for PBXNativeTarget "BGTimer-BLE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD82A1631EA89F15001A52A6 /* Debug */,
+				BD82A1641EA89F15001A52A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD82A1701EA89F1F001A52A6 /* Build configuration list for PBXNativeTarget "BGTImer-Loc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD82A1711EA89F1F001A52A6 /* Debug */,
+				BD82A1721EA89F1F001A52A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

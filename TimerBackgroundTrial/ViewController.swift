@@ -20,8 +20,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        #if BGBLE
         centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+        #endif
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,8 +31,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction func OnReadBLETagsClicked(_ sender: Any) {
+        #if BGBLE
         peripherals.removeAll()
         self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
+        #endif
     }
 }
 
