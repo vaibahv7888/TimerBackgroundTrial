@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var peripherals = Array<CBPeripheral>()
     @IBOutlet weak var tableView: UITableView!
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -47,6 +49,15 @@ extension ViewController: CBCentralManagerDelegate {
         if !peripherals.contains(peripheral) {
             peripherals.append(peripheral)
             tableView.reloadData()
+            if(!appDelegate.timer.isValid) {
+                appDelegate.timer.invalidate()
+                appDelegate.counter = 0;
+                appDelegate.startTimer()
+                print("In BLE didDiscover update INVALID TIMER")
+                appDelegate.println(s: "Starting timer from BLE didDiscover")
+            }
+            print("BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
+            appDelegate.println(s: "BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
         }
     }
 }
