@@ -41,7 +41,7 @@ class ViewController: UIViewController {
 extension ViewController: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if (central.state == .poweredOn){
-            self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
+//            self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
         }
         else {
             // do something like alert the user that ble is not on
@@ -52,13 +52,13 @@ extension ViewController: CBCentralManagerDelegate {
         if !peripherals.contains(peripheral) {
             peripherals.append(peripheral)
             tableView.reloadData()
-            if(!appDelegate.timer.isValid) {
-                appDelegate.timer.invalidate()
-                appDelegate.counter = 0;
-                appDelegate.startTimer()
-                print("In BLE didDiscover update INVALID TIMER")
-                appDelegate.println(s: "Starting timer from BLE didDiscover")
-            }
+//            if(!appDelegate.timer.isValid) {
+//                appDelegate.timer.invalidate()
+//                appDelegate.counter = 0;
+//                appDelegate.startTimer()
+//                print("In BLE didDiscover update INVALID TIMER")
+//                appDelegate.println(s: "Starting timer from BLE didDiscover")
+//            }
             print("BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
             appDelegate.println(s: "BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
         }

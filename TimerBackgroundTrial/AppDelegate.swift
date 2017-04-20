@@ -13,123 +13,164 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-    var manager = CLLocationManager()
-    var timer = Timer()
+    var _locationManager : CLLocationManager?
+    var timer : Timer?
 
     let backgroundTaskName = "backgroundTaskName"
     var backgroundTaskId : UIBackgroundTaskIdentifier?
     var counter : Int = 0
     let timerIntervalSeconds : Int = 10
-    var logFileName = "log.txt"
-
+    var _logFileName = "BGTimer"
+    var _logFilePath : String?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-       
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.delegate = self
-        manager.requestAlwaysAuthorization()
         
-        if #available(iOS 9.0, *) {
-            manager.allowsBackgroundLocationUpdates = true
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        startTimer()
-        
-        manager.startUpdatingLocation()
+        #if BGFETCH
+            _logFileName = "BGFetch"
+            UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        #elseif BGLOC
+            _logFileName = "BGLoc"
+            getLocationManager().startUpdatingLocation()
+        #elseif BGBLE
+            _logFileName = "BGBLE"
+            
+        #else
+            
+        #endif
         
         return true
     }
     
+    
+    // MARK: Background fetch
+    
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if(!timer.isValid) {
-            timer.invalidate()
-            self.counter = 0;
-            startTimer()
-            print("In background fetch update INVALID TIMER")
-            println(s: "Starting timer from background fetch")
-        }
-        print("In backgroud fetch valid TIMER")
-        println(s: "in background fetch")
+//        if(!timer.isValid) {
+//            timer.invalidate()
+//            self.counter = 0;
+//            checkAndStartTimer()
+//            print("In background fetch update INVALID TIMER")
+//            println(s: "Starting timer from background fetch")
+//        }
+        
+//        print("In backgroud fetch valid TIMER")
+        println(s: "\(getCurrentTime()) | Background fetch")
         completionHandler(.newData)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        if(!timer.isValid) {
-            timer.invalidate()
-            self.counter = 0;
-            startTimer()
-            print("In Location update INVALID TIMER")
-            println(s: "Starting timer from Location Update")
+    
+    func getLocationManager() -> CLLocationManager {
+        if nil == _locationManager {
+            _locationManager = CLLocationManager()
+            _locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+            _locationManager!.delegate = self
+            _locationManager!.requestAlwaysAuthorization()
+            
+            if #available(iOS 9.0, *) {
+                _locationManager!.allowsBackgroundLocationUpdates = true
+            } else {
+                // Fallback on earlier versions
+            }
         }
-        let currentLocation = locations.first
-        print("Current Location Lat = \(String(describing: currentLocation?.coordinate.latitude))")
-        print("Current Location Long = \(String(describing: currentLocation?.coordinate.longitude))")
-        print("timer isValid= \(timer.isValid)")
-        println(s: "timer isValid= \(timer.isValid)")
-        println(s:"Current Location Lat = \(String(describing: currentLocation?.coordinate.latitude))")
-        println(s:"Current Location Long = \(String(describing: currentLocation?.coordinate.longitude))")
+        return _locationManager!
     }
     
-    func startTimer() {
-        if #available(iOS 10.0, *) {
-            if(self.counter == 0) {
-                self.logFileName = "\(self.getCurrentTime()).txt"
-                println(s: "Started At Time: \(self.getCurrentTime())")
-            }
-            timer = Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
-                self.counter += 1
-                print("Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
-                self.println(s: "Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
-            }
-        } else {
-            // Fallback on earlier versions
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+//        if(!timer.isValid) {
+//            timer.invalidate()
+//            self.counter = 0;
+//            checkAndStartTimer()
+//            print("In Location update INVALID TIMER")
+//            println(s: "Starting timer from Location Update")
+//        }
+        if let currentLocation = locations.first?.coordinate {
+            println(s: "\(getCurrentTime()) | Loc (lat:long) -  \(currentLocation.latitude) : \(currentLocation.latitude)")
         }
+//        print("Current Location Lat = \(String(describing: currentLocation?.coordinate.latitude))")
+//        print("Current Location Long = \(String(describing: currentLocation?.coordinate.longitude))")
+//        print("timer isValid= \(timer.isValid)")
+//        println(s: "timer isValid= \(timer.isValid)")
+//        println(s:"Current Location Lat = \(String(describing: currentLocation?.coordinate.latitude))")
+//        println(s:"Current Location Long = \(String(describing: currentLocation?.coordinate.longitude))")
+        
+    }
+    
+    func checkAndStartTimer() {
+        if nil == timer || (timer?.isValid)! {
+            println(s: "Timer started at : \(self.getCurrentTime())")
+            if #available(iOS 10.0, *) {
+                timer = Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
+                    self.timerFunction(timer : timer)
+                }
+            } else {
+                // Fallback on earlier versions
+                timer = Timer.scheduledTimer(timeInterval: Double(timerIntervalSeconds), target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
+            }
+        }
+    }
+    
+    
+    func timerFunction(timer : Timer) {
+        self.counter += 1
+        print("Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
+        self.println(s: "\(self.getCurrentTime()) | Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
+    }
+    
+    func logFilePath() -> String {
+        if nil == _logFilePath {
+            var filename = _logFileName
+            filename = filename + ".log"
+            let paths: NSArray = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
+            let documentsDirectory: NSString = paths[0] as! NSString
+            let logPath: NSString = documentsDirectory.appendingPathComponent(filename) as NSString
+            _logFilePath = logPath as String
+        }
+        return _logFilePath!
     }
     
     func println(s:String) {
-        var dump = ""
-        if(self.counter == 0) {
-            dump = "\(getCurrentTime())"
-        }
-        
-        let paths: NSArray = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
-        let documentsDirectory: NSString = paths[0] as! NSString
-        let logPath: NSString = documentsDirectory.appendingPathComponent(logFileName) as NSString
-        let path = logPath
+        let timestamp = getCurrentTime()
+        let logPath = self.logFilePath()
+        var dump = "\n\nStarting new log at : \(timestamp)"
 
-        if FileManager.default.fileExists(atPath: path as String) {
-            dump =  try! String(contentsOfFile: path as String, encoding: String.Encoding.utf8)
+        if FileManager.default.fileExists(atPath: logPath) {
+            dump =  try! String(contentsOfFile: logPath, encoding: String.Encoding.utf8)
         }
         do {
             // Write to the file
-            try  "\(dump)\n\(s)".write(toFile: path as String, atomically: true, encoding: String.Encoding.utf8)
+            try  "\(dump)\n\(s)".write(toFile: logPath, atomically: true, encoding: String.Encoding.utf8)
             
         } catch let error as NSError {
-            print("Failed writing to log file: \(path), Error: " + error.localizedDescription)
+            print("Failed writing to log file: \(logPath), Error: " + error.localizedDescription)
         }
     }
     
     func getCurrentTime() -> String {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH.mm.ss"    //"HH.mm dd.MM.yyyy"
+        formatter.dateFormat = "MM-dd HH.mm.ss"    //"HH.mm dd.MM.yyyy"
         let result = formatter.string(from: date)
         return result
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
         print("applicationWillResignActive")
-        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: backgroundTaskName) {
-            print("backgroundTaskName")
-        }
-        
+        #if BGFETCH || BGLOC || BGBLE
+            print("Background task not required as we will be using a standard background mode.")
+        #else
+            if nil == backgroundTaskId {
+                backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: backgroundTaskName) {
+                    print("Background task : \(self.backgroundTaskName)")
+                    self.checkAndStartTimer()
+                }
+            }
+        #endif
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("applicationDidEnterBackground")
-        manager.startMonitoringSignificantLocationChanges()
+        getLocationManager().startMonitoringSignificantLocationChanges()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -140,6 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         print("applicationDidBecomeActive")
         if let taskId = backgroundTaskId {
             UIApplication.shared.endBackgroundTask(taskId)
+            backgroundTaskId = nil
         }
         
     }
