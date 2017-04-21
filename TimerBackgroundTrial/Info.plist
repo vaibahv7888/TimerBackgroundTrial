@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need to use location service</string>
+	<string>Background location updates</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need to use location service</string>
+	<string>Location service to server</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
