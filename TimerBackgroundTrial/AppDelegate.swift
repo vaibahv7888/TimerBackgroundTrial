@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let backgroundTaskName = "backgroundTaskName"
     var backgroundTaskId : UIBackgroundTaskIdentifier?
     var counter : Int = 0
-    let timerIntervalSeconds : Int = 10
+    let timerIntervalSeconds : Int = 12
     var timer : Timer?
     
     var _logFileName = "BGTimer"
@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if BGBLE
             getCentralManager ()
             stopBGBLETimer()
+        #else
         #endif
     }
 
@@ -74,12 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #elseif BGBLE
             checkAndStartBackgroundBLETimer()
         #else
-            if nil == backgroundTaskId {
-                backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: backgroundTaskName) {
-                    print("Background task : \(self.backgroundTaskName)")
-                    self.checkAndStartTimer()
-                }
-            }
         #endif
     }
     
@@ -88,6 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if BGLOC
 //            getLocationManager().startMonitoringSignificantLocationChanges()
         #elseif BGBLE
+        #else
+            if nil == backgroundTaskId {
+                backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: backgroundTaskName) {
+                    print("Background task completed : \(self.backgroundTaskName)")
+                }
+                print("bg task : \(backgroundTaskId!)")
+                self.checkAndStartTimer()
+            }
         #endif
     }
     
@@ -257,11 +260,22 @@ private typealias AppDelegateBLE = AppDelegate
 extension AppDelegateBLE: CBCentralManagerDelegate {
     func getCentralManager () -> CBCentralManager {
         if nil == _centralManager {
-            _centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey : BLE_SCANNER_RESTORATION_ID])
+            _centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey : BLE_SCANNER_RESTORATION_ID,
+                                                                                     CBCentralManagerOptionShowPowerAlertKey : true])
         }
         return _centralManager!
     }
     
+    func restartBLEScan() {
+        if #available(iOS 9.0, *) {
+            if getCentralManager().isScanning {
+                getCentralManager().stopScan()
+            }
+        } else {
+            getCentralManager().stopScan()
+        }
+        checkAndStartBLEScan()
+    }
     
     func checkAndStartBLEScan() {
         if #available(iOS 9.0, *) {
@@ -270,7 +284,6 @@ extension AppDelegateBLE: CBCentralManagerDelegate {
             }
         }
     }
-    
     
     func checkAndStartBackgroundBLETimer() {
         if nil == bgBLETimer || !(bgBLETimer?.isValid)! {
