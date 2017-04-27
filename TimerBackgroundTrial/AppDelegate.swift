@@ -21,12 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let timerIntervalSeconds : Int = 12
     var timer : Timer?
     
-    var _logFileName = "BGTimer"
-    var _logFilePath : String?
-
     var _locationManager : CLLocationManager?
     var _deferedLocUpdateAllowed = false
     
+    let _BLEScanInterval : Int = 120
+    let _BLEScanDuration : Int = 60
     let BLE_SERVICE_UUID = CBUUID(string: "00001800-0000-1000-8000-00805f9b34fb")
     let BLE_SCANNER_RESTORATION_ID = "BLE_SCANNER_RESTORATION_ID"
     var bgBLETimer : Timer?
@@ -34,17 +33,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        #if BGFETCH
-            _logFileName = "BGFetch"
+        #if ALLBGMODES
+            Logger.setLogFileName(name :"BGAllModes")
+            UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+            getLocationManager().startUpdatingLocation()
+        #elseif BGFETCH
+            Logger.setLogFileName(name :"BGFetch")
             UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         #elseif BGLOC
-            _logFileName = "BGLoc"
+            Logger.setLogFileName(name :"BGLoc")
             getLocationManager().startUpdatingLocation()
         #elseif BGBLE
-            _logFileName = "BGBLE"
-            
+            Logger.setLogFileName(name :"BGBLE")
         #else
-            
         #endif
         
         return true
@@ -61,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.endBackgroundTask(taskId)
             backgroundTaskId = nil
         }
-        #if BGBLE
+        #if BGBLE || ALLBGMODES
             getCentralManager ()
             stopBGBLETimer()
         #else
@@ -106,7 +107,7 @@ private typealias AppDelegateTimer = AppDelegate
 extension AppDelegateTimer {
     func checkAndStartTimer() {
         if nil == timer || !(timer?.isValid)! {
-            println(s: "Timer started at : \(self.getCurrentTime())")
+            Logger.println(s: "Timer started at : \(getCurrentTime())")
             if #available(iOS 10.0, *) {
                 timer = Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
                     self.timerFunction(timer : timer)
@@ -121,52 +122,10 @@ extension AppDelegateTimer {
     func timerFunction(timer : Timer) {
         self.counter += 1
         print("Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
-        self.println(s: "\(self.getCurrentTime()) | Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
+        Logger.println(s: "\(getCurrentTime()) | Count - \(self.counter) | Time - \((self.counter * self.timerIntervalSeconds/60)):\((self.counter * self.timerIntervalSeconds)%60))")
     }
     
-    func getCurrentTime() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd HH.mm.ss"    //"HH.mm dd.MM.yyyy"
-        let result = formatter.string(from: date)
-        return result
-    }
 }
-
-
-// MARK: Logging
-private typealias AppDelegateLogging = AppDelegate
-extension AppDelegateLogging {
-    func logFilePath() -> String {
-        if nil == _logFilePath {
-            var filename = _logFileName
-            filename = filename + ".log"
-            let paths: NSArray = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
-            let documentsDirectory: NSString = paths[0] as! NSString
-            let logPath: NSString = documentsDirectory.appendingPathComponent(filename) as NSString
-            _logFilePath = logPath as String
-        }
-        return _logFilePath!
-    }
-    
-    func println(s:String) {
-        let timestamp = getCurrentTime()
-        let logPath = self.logFilePath()
-        var dump = "\n\nStarting new log at : \(timestamp)"
-        
-        if FileManager.default.fileExists(atPath: logPath) {
-            dump =  try! String(contentsOfFile: logPath, encoding: String.Encoding.utf8)
-        }
-        do {
-            // Write to the file
-            try  "\(dump)\n\(s)".write(toFile: logPath, atomically: true, encoding: String.Encoding.utf8)
-            
-        } catch let error as NSError {
-            print("Failed writing to log file: \(logPath), Error: " + error.localizedDescription)
-        }
-    }
-}
-
 
 
 // MARK: Location
@@ -191,10 +150,10 @@ extension AppDelegateLoc : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         print("didUpdateLocations");
-        println(s: "\(getCurrentTime()) | didUpdateLocations")
+        Logger.println(s: "\(getCurrentTime()) | didUpdateLocations")
         
         for location in locations {
-            println(s: "\t\t\t | Loc(lat:long) -  \(location.coordinate.latitude) : \(location.coordinate.latitude) |  Accuracy : \(location.horizontalAccuracy) | Timestamp : \(location.timestamp) ")
+            Logger.println(s: "\t\t\t | Loc(lat:long) -  \(location.coordinate.latitude) : \(location.coordinate.latitude) |  Accuracy : \(location.horizontalAccuracy) | Timestamp : \(location.timestamp) ")
         }
         
         if !_deferedLocUpdateAllowed {
@@ -205,19 +164,19 @@ extension AppDelegateLoc : CLLocationManagerDelegate {
     
     public func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
         print("locationManagerDidPauseLocationUpdates");
-        println(s: "\(getCurrentTime()) | locationManagerDidPauseLocationUpdates")
+        Logger.println(s: "\(getCurrentTime()) | locationManagerDidPauseLocationUpdates")
     }
     
     
     public func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
         print("locationManagerDidResumeLocationUpdates");
-        println(s: "\(getCurrentTime()) | locationManagerDidResumeLocationUpdates")
+        Logger.println(s: "\(getCurrentTime()) | locationManagerDidResumeLocationUpdates")
     }
     
     public func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
         if nil != error {
             print("didFinishDeferredUpdatesWithError : \(error!.localizedDescription)");
-            println(s: "\(getCurrentTime()) | didFinishDeferredUpdatesWithError : \(error!.localizedDescription)")
+            Logger.println(s: "\(getCurrentTime()) | didFinishDeferredUpdatesWithError : \(error!.localizedDescription)")
         }
 //        manager.startUpdatingLocation()
     }
@@ -248,7 +207,7 @@ extension AppDelegateFetch {
                 print("No data")
                 logData = logData + " | No data"
             }
-            self.println(s: "\(self.getCurrentTime()) | \(logData)")
+            Logger.println(s: "\(getCurrentTime()) | \(logData)")
             completionHandler(fetchResult)
         }
         task.resume()
@@ -281,21 +240,23 @@ extension AppDelegateBLE: CBCentralManagerDelegate {
         if #available(iOS 9.0, *) {
             if !getCentralManager().isScanning {
                 getCentralManager().scanForPeripherals(withServices: [BLE_SERVICE_UUID], options: nil)
+                bgBLETimer = Timer.scheduledTimer(timeInterval: Double(_BLEScanDuration), target: self, selector: #selector(stopBLEScanTimerFunction), userInfo: nil, repeats: false)
             }
         }
     }
-    
+
+    func checkAndStopBLEScan() {
+        if #available(iOS 9.0, *) {
+            if getCentralManager().isScanning {
+                getCentralManager().stopScan()
+            }
+        }
+    }
+
     func checkAndStartBackgroundBLETimer() {
         if nil == bgBLETimer || !(bgBLETimer?.isValid)! {
-            println(s: "Timer started at : \(self.getCurrentTime())")
-            if #available(iOS 10.0, *) {
-                bgBLETimer = Timer.scheduledTimer(withTimeInterval: Double(timerIntervalSeconds) as Double, repeats: true) { (timer) in
-                    self.bgBLETimerFunction(timer : timer)
-                }
-            } else {
-                // Fallback on earlier versions
-                bgBLETimer = Timer.scheduledTimer(timeInterval: Double(timerIntervalSeconds), target: self, selector: #selector(bgBLETimerFunction), userInfo: nil, repeats: true)
-            }
+            Logger.println(s: "Timer started at : \(getCurrentTime())")
+            bgBLETimer = Timer.scheduledTimer(timeInterval: Double(_BLEScanInterval), target: self, selector: #selector(bgBLETimerFunction), userInfo: nil, repeats: true)
         }
     }
     
@@ -311,6 +272,11 @@ extension AppDelegateBLE: CBCentralManagerDelegate {
         checkAndStartBLEScan()
     }
     
+    func stopBLEScanTimerFunction(timer : Timer) {
+        checkAndStopBLEScan()
+    }
+    
+
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if (central.state == .poweredOn){
         }
@@ -327,7 +293,7 @@ extension AppDelegateBLE: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("BLE didDiscover Peripheral: \(peripheral.identifier.uuidString) | Adv : \(advertisementData)")
-        println(s: "\(self.getCurrentTime()) | BLE Scan : \(peripheral.identifier.uuidString)")
+        Logger.println(s: "\(getCurrentTime()) | BLE Scan : \(peripheral.identifier.uuidString)")
     }
 }
 

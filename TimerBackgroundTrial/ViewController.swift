@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         #if BGBLE
-        centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+//        centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
         #endif
     }
 
@@ -32,8 +32,8 @@ class ViewController: UIViewController {
 
     @IBAction func OnReadBLETagsClicked(_ sender: Any) {
         #if BGBLE
-        peripherals.removeAll()
-        self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
+//        peripherals.removeAll()
+//        self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
         #endif
     }
 }
@@ -60,7 +60,7 @@ extension ViewController: CBCentralManagerDelegate {
 //                appDelegate.println(s: "Starting timer from BLE didDiscover")
 //            }
             print("BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
-            appDelegate.println(s: "BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
+            Logger.println(s: "BLE didDiscover Peripheral: \(peripherals.count). \(peripheral.identifier.uuidString)")
         }
     }
 }
