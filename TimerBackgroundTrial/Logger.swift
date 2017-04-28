@@ -49,4 +49,5 @@ struct Logger {
             print("Failed writing to log file: \(logPath), Error: " + error.localizedDescription)
         }
     }
+    
 }
