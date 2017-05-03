@@ -44,11 +44,11 @@ class TaskManager {
     func applicationDidBecomeActive(_ application: UIApplication) {
         NSLog("\(#function)")
         #if ALLBGMODES
-            BLEScanManager.shared.stopBGBLETimer()
+            BLEScanManager.shared.stopScanTimer()
         #elseif BGLOC
         #elseif BGFETCH
         #elseif BGBLE
-            BLEScanManager.shared.stopBGBLETimer()
+            BLEScanManager.shared.stopScanTimer()
         #else
             if let taskId = backgroundTaskId {
                 UIApplication.shared.endBackgroundTask(taskId)
@@ -70,10 +70,10 @@ class TaskManager {
     func applicationDidEnterBackground(_ application: UIApplication) {
         NSLog("\(#function)")
         #if ALLBGMODES
-            BLEScanManager.shared.checkAndStartBackgroundBLETimer()
+            BLEScanManager.shared.checkAndStartScanTimer()
         #elseif BGLOC
         #elseif BGBLE
-            BLEScanManager.shared.checkAndStartBackgroundBLETimer()
+            BLEScanManager.shared.checkAndStartScanTimer()
         #elseif BGFETCH
         #else
             if nil == backgroundTaskId {

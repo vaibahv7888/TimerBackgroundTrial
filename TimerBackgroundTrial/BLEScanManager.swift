@@ -16,11 +16,11 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
         print("BLE Scanner state : \(getCentralManager ().state)")
     }
 
-    let _BLEScanInterval : Int = 60
-    let _BLEScanDuration : Int = 40
+    let _BLEScanInterval : Int = 20
+    let _BLEScanDuration : Int = 15
     let BLE_SERVICE_UUIDS : [CBUUID] = [CBUUID(string: "0000ff00-0000-1000-8000-00805f9b34fb")] // , CBUUID(string: "00001800-0000-1000-8000-00805f9b34fb")]
     let BLE_SCANNER_RESTORATION_ID = "BLE_SCANNER_RESTORATION_ID"
-    var bgBLETimer : Timer?
+    var _scanTimer : Timer?
     var _centralManager: CBCentralManager?
 
     func getCentralManager () -> CBCentralManager {
@@ -45,7 +45,7 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
     func checkAndStartBLEScan() {
         NSLog("\(#function)")
         getCentralManager().scanForPeripherals(withServices: BLE_SERVICE_UUIDS, options: nil)
-        Timer.scheduledTimer(timeInterval: Double(_BLEScanDuration), target: self, selector: #selector(stopBLEScanTimerFunction), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: Double(_BLEScanDuration), target: self, selector: #selector(stopScanTimerFunction), userInfo: nil, repeats: false)
     }
     
     func checkAndStopBLEScan() {
@@ -59,30 +59,30 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
         }
     }
     
-    func checkAndStartBackgroundBLETimer() {
+    func checkAndStartScanTimer() {
         NSLog("\(#function)")
-        if nil == bgBLETimer || !(bgBLETimer?.isValid)! {
+        if nil == _scanTimer || !(_scanTimer?.isValid)! {
             Logger.println(s: "Timer started at : \(getCurrentTime())")
-            bgBLETimer = Timer.scheduledTimer(timeInterval: Double(_BLEScanInterval), target: self, selector: #selector(bgBLETimerFunction), userInfo: nil, repeats: true)
-            bgBLETimer?.fire()
+            _scanTimer = Timer.scheduledTimer(timeInterval: Double(_BLEScanInterval), target: self, selector: #selector(scanTimerFunction), userInfo: nil, repeats: true)
+            _scanTimer?.fire()
         }
     }
     
-    func stopBGBLETimer () {
+    func stopScanTimer () {
         NSLog("\(#function)")
-        if nil != bgBLETimer && (bgBLETimer?.isValid)! {
-            bgBLETimer?.invalidate()
-            bgBLETimer = nil
+        if nil != _scanTimer && (_scanTimer?.isValid)! {
+            _scanTimer?.invalidate()
+            _scanTimer = nil
         }
         
     }
     
-    func bgBLETimerFunction(timer : Timer) {
+    func scanTimerFunction(timer : Timer) {
         NSLog("\(#function)")
         checkAndStartBLEScan()
     }
     
-    func stopBLEScanTimerFunction(timer : Timer) {
+    func stopScanTimerFunction(timer : Timer) {
         NSLog("\(#function)")
         checkAndStopBLEScan()
     }
@@ -98,13 +98,13 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
     
     public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         if (central.state == .poweredOn){
-            checkAndStartBLEScan()
+            checkAndStartScanTimer()
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         NSLog("\(#function)")
-//        NSLog("BLE didDiscover Peripheral: \(peripheral.identifier.uuidString) | Adv : \(advertisementData)")
+        NSLog("BLE didDiscover Peripheral: \(peripheral.identifier.uuidString) | Adv : \(advertisementData)")
         Logger.println(s: "\(getCurrentTime()) | BLE Scan : \(peripheral.identifier.uuidString)")
     }
     
