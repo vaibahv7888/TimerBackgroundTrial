@@ -18,7 +18,7 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
 
     let _BLEScanInterval : Int = 60
     let _BLEScanDuration : Int = 40
-    let BLE_SERVICE_UUIDS : [CBUUID] = [CBUUID(string: "00001800-0000-1000-8000-00805f9b34fb"), CBUUID(string: "0000ff00-0000-1000-8000-00805f9b34fb")]
+    let BLE_SERVICE_UUIDS : [CBUUID] = [CBUUID(string: "0000ff00-0000-1000-8000-00805f9b34fb")] // , CBUUID(string: "00001800-0000-1000-8000-00805f9b34fb")]
     let BLE_SCANNER_RESTORATION_ID = "BLE_SCANNER_RESTORATION_ID"
     var bgBLETimer : Timer?
     var _centralManager: CBCentralManager?
@@ -44,12 +44,8 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
     
     func checkAndStartBLEScan() {
         NSLog("\(#function)")
-        if #available(iOS 9.0, *) {
-            if !getCentralManager().isScanning {
-                getCentralManager().scanForPeripherals(withServices: BLE_SERVICE_UUIDS, options: nil)
-                bgBLETimer = Timer.scheduledTimer(timeInterval: Double(_BLEScanDuration), target: self, selector: #selector(stopBLEScanTimerFunction), userInfo: nil, repeats: false)
-            }
-        }
+        getCentralManager().scanForPeripherals(withServices: BLE_SERVICE_UUIDS, options: nil)
+        Timer.scheduledTimer(timeInterval: Double(_BLEScanDuration), target: self, selector: #selector(stopBLEScanTimerFunction), userInfo: nil, repeats: false)
     }
     
     func checkAndStopBLEScan() {
