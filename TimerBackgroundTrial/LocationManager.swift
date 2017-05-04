@@ -25,6 +25,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
             _locationManager?.delegate = self
             _locationManager?.requestAlwaysAuthorization()
             _locationManager?.distanceFilter = kCLDistanceFilterNone
+            _locationManager?.pausesLocationUpdatesAutomatically = true
             _deferedLocUpdateAllowed = false
             if #available(iOS 9.0, *) {
                 _locationManager!.allowsBackgroundLocationUpdates = true
