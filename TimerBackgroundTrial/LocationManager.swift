@@ -59,7 +59,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     
     // MARK: Location manager delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        NSLog("\(#function)")
+//        NSLog("\(#function)")
         handleLocationsUpdate(locations: locations)
         if !_deferedLocUpdateAllowed {
             _locationManager?.allowDeferredLocationUpdates(untilTraveled: CLLocationDistanceMax, timeout: 300)
