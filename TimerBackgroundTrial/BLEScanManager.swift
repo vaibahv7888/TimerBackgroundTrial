@@ -32,29 +32,19 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
     }
     
     func restartBLEScan() {
-        if #available(iOS 9.0, *) {
-            if getCentralManager().isScanning {
-                getCentralManager().stopScan()
-            }
-        } else {
-            getCentralManager().stopScan()
-        }
-        checkAndStartBLEScan()
+        stopBLEScan()
+        startBLEScan()
     }
     
-    func checkAndStartBLEScan() {
+    func startBLEScan() {
         NSLog("\(#function)")
         getCentralManager().scanForPeripherals(withServices: BLE_SERVICE_UUIDS, options: nil)
         Timer.scheduledTimer(timeInterval: Double(_BLEScanDuration), target: self, selector: #selector(stopScanTimerFunction), userInfo: nil, repeats: false)
     }
     
-    func checkAndStopBLEScan() {
+    func stopBLEScan() {
         NSLog("\(#function)")
-        if #available(iOS 9.0, *) {
-            if getCentralManager().isScanning {
-                getCentralManager().stopScan()
-            }
-        } else {
+        if getCentralManager().isScanning {
             getCentralManager().stopScan()
         }
     }
@@ -79,12 +69,12 @@ class BLEScanManager : NSObject, CBCentralManagerDelegate {
     
     func scanTimerFunction(timer : Timer) {
         NSLog("\(#function)")
-        checkAndStartBLEScan()
+        startBLEScan()
     }
     
     func stopScanTimerFunction(timer : Timer) {
         NSLog("\(#function)")
-        checkAndStopBLEScan()
+        stopBLEScan()
     }
     
     

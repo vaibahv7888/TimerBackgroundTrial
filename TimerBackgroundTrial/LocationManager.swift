@@ -27,11 +27,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
             _locationManager?.distanceFilter = kCLDistanceFilterNone
             _locationManager?.pausesLocationUpdatesAutomatically = true
             _deferedLocUpdateAllowed = false
-            if #available(iOS 9.0, *) {
-                _locationManager!.allowsBackgroundLocationUpdates = true
-            } else {
-                // Fallback on earlier versions
-            }
+            _locationManager!.allowsBackgroundLocationUpdates = true
         }
         return _locationManager!
     }
