@@ -14,7 +14,7 @@ struct Logger {
     private static var _logFileName = "BGTimer"
     private static var _logFilePath : String?
     
-    private static func logFilePath() -> String {
+    public static func logFilePath() -> String {
         if nil == _logFilePath {
             var filename = _logFileName
             filename = filename + ".log"
@@ -48,6 +48,17 @@ struct Logger {
         } catch let error as NSError {
             print("Failed writing to log file: \(logPath), Error: " + error.localizedDescription)
         }
+    }
+    
+    static func clearLog(completionHandler : () -> ()) {
+        do {
+            // Write to the file
+            try  "".write(toFile: self.logFilePath(), atomically: true, encoding: String.Encoding.utf8)
+            
+        } catch let error as NSError {
+            print("Failed clearng log file: \(self.logFilePath()), Error: " + error.localizedDescription)
+        }
+        completionHandler()
     }
     
 }

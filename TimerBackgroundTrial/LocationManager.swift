@@ -99,12 +99,14 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     }
     
     public func handleLocationsUpdate(locations: [CLLocation]) {
-        Logger.println(s: "\(getCurrentTime()) | \(#function) | _lastLocTmStmp : \(_lastLocationupdateTimeStamp)")
+        Logger.println(s: "\n\(getCurrentTime()) | \(#function) | _lastLocTmStmp : \(_lastLocationupdateTimeStamp)")
         for location in locations {
             if (location.timestamp.timeIntervalSince1970 - _lastLocationupdateTimeStamp) > 30 {
                 _lastLocationupdateTimeStamp = location.timestamp.timeIntervalSince1970
                 NSLog("\(#function) | _lastLocTmStmp : \(_lastLocationupdateTimeStamp) | _locTmStmp : \(location.timestamp.timeIntervalSince1970)")
-                Logger.println(s: "\t\t\t | Loc(lat:long) -  \(location.coordinate.latitude) : \(location.coordinate.latitude) |  Accuracy : \(location.horizontalAccuracy) | Timestamp : \(location.timestamp) ")
+                
+                
+                Logger.println(s: String(format: "Loc (%0.3f : %0.3f) | Accu %d | Ts : %ld", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy, location.timestamp.timeIntervalSince1970))
             }
         }
     }

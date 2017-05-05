@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD1614D81EBC56CD00683DF0 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1614D71EBC56CD00683DF0 /* LogViewController.swift */; };
+		BD1614D91EBC56CD00683DF0 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1614D71EBC56CD00683DF0 /* LogViewController.swift */; };
+		BD1614DA1EBC56CD00683DF0 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1614D71EBC56CD00683DF0 /* LogViewController.swift */; };
+		BD1614DB1EBC56CD00683DF0 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1614D71EBC56CD00683DF0 /* LogViewController.swift */; };
+		BD1614DC1EBC56CD00683DF0 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1614D71EBC56CD00683DF0 /* LogViewController.swift */; };
 		BD7E49B11E9FA3AD00E59D9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */; };
 		BD7E49B31E9FA3AD00E59D9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */; };
 		BD7E49B61E9FA3AD00E59D9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7E49B41E9FA3AD00E59D9A /* Main.storyboard */; };
@@ -65,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD1614D71EBC56CD00683DF0 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		BD7E49AD1E9FA3AD00E59D9A /* BGTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BGTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 			children = (
 				BD7E49B01E9FA3AD00E59D9A /* AppDelegate.swift */,
 				BD7E49B21E9FA3AD00E59D9A /* ViewController.swift */,
+				BD1614D71EBC56CD00683DF0 /* LogViewController.swift */,
 				BDFA50761EB1DA9A00CA2560 /* TaskManager.swift */,
 				BDFA507C1EB1DB4900CA2560 /* LocationManager.swift */,
 				BDFA50821EB1DB5800CA2560 /* BLEScanManager.swift */,
@@ -367,6 +374,7 @@
 				BDFA50891EB1DB6700CA2560 /* DataSyncManager.swift in Sources */,
 				BDFA507D1EB1DB4900CA2560 /* LocationManager.swift in Sources */,
 				BDFA50771EB1DA9A00CA2560 /* TaskManager.swift in Sources */,
+				BD1614D81EBC56CD00683DF0 /* LogViewController.swift in Sources */,
 				BD7E49B31E9FA3AD00E59D9A /* ViewController.swift in Sources */,
 				BDFA50951EB1EBBF00CA2560 /* Utility.swift in Sources */,
 				BDFA508F1EB1EAB000CA2560 /* Logger.swift in Sources */,
@@ -382,6 +390,7 @@
 				BDFA508A1EB1DB6700CA2560 /* DataSyncManager.swift in Sources */,
 				BDFA507E1EB1DB4900CA2560 /* LocationManager.swift in Sources */,
 				BDFA50781EB1DA9A00CA2560 /* TaskManager.swift in Sources */,
+				BD1614D91EBC56CD00683DF0 /* LogViewController.swift in Sources */,
 				BD82A14D1EA89F12001A52A6 /* ViewController.swift in Sources */,
 				BDFA50961EB1EBBF00CA2560 /* Utility.swift in Sources */,
 				BDFA50901EB1EAB000CA2560 /* Logger.swift in Sources */,
@@ -397,6 +406,7 @@
 				BDFA508B1EB1DB6700CA2560 /* DataSyncManager.swift in Sources */,
 				BDFA507F1EB1DB4900CA2560 /* LocationManager.swift in Sources */,
 				BDFA50791EB1DA9A00CA2560 /* TaskManager.swift in Sources */,
+				BD1614DA1EBC56CD00683DF0 /* LogViewController.swift in Sources */,
 				BD82A15B1EA89F15001A52A6 /* ViewController.swift in Sources */,
 				BDFA50971EB1EBBF00CA2560 /* Utility.swift in Sources */,
 				BDFA50911EB1EAB000CA2560 /* Logger.swift in Sources */,
@@ -412,6 +422,7 @@
 				BDFA508C1EB1DB6700CA2560 /* DataSyncManager.swift in Sources */,
 				BDFA50801EB1DB4900CA2560 /* LocationManager.swift in Sources */,
 				BDFA507A1EB1DA9A00CA2560 /* TaskManager.swift in Sources */,
+				BD1614DB1EBC56CD00683DF0 /* LogViewController.swift in Sources */,
 				BD82A1691EA89F1F001A52A6 /* ViewController.swift in Sources */,
 				BDFA50981EB1EBBF00CA2560 /* Utility.swift in Sources */,
 				BDFA50921EB1EAB000CA2560 /* Logger.swift in Sources */,
@@ -427,6 +438,7 @@
 				BDFA508D1EB1DB6700CA2560 /* DataSyncManager.swift in Sources */,
 				BDFA50811EB1DB4900CA2560 /* LocationManager.swift in Sources */,
 				BDFA507B1EB1DA9A00CA2560 /* TaskManager.swift in Sources */,
+				BD1614DC1EBC56CD00683DF0 /* LogViewController.swift in Sources */,
 				BD95B14B1EAF21DF00196907 /* ViewController.swift in Sources */,
 				BDFA50991EB1EBBF00CA2560 /* Utility.swift in Sources */,
 				BDFA50931EB1EAB000CA2560 /* Logger.swift in Sources */,

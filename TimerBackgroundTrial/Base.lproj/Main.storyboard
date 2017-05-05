@@ -1,19 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="caG-UP-8H6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="7DP-iO-JDn">
+            <objects>
+                <navigationController id="caG-UP-8H6" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iyu-tz-pTy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rHN-ea-Ea8" kind="relationship" relationship="rootViewController" id="bQH-XY-bXq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TV3-UT-WBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1303" y="-178"/>
+        </scene>
+        <!--Log-->
+        <scene sceneID="Nkd-8b-qBe">
+            <objects>
+                <viewController restorationIdentifier="LogViewController" storyboardIdentifier="LogViewController" automaticallyAdjustsScrollViewInsets="NO" id="rHN-ea-Ea8" customClass="LogViewController" customModule="BGTImer_Loc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mN7-vR-cyd"/>
+                        <viewControllerLayoutGuide type="bottom" id="RrC-VM-IHf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZoG-tR-CZm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView autoresizesSubviews="NO" contentMode="TopLeft" scalesPageToFit="YES" allowsInlineMediaPlayback="NO" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHG-bL-N0I">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RrC-VM-IHf" firstAttribute="top" secondItem="uHG-bL-N0I" secondAttribute="bottom" id="5mK-Up-TLt"/>
+                            <constraint firstItem="uHG-bL-N0I" firstAttribute="leading" secondItem="ZoG-tR-CZm" secondAttribute="leading" id="DDk-Cg-ggb"/>
+                            <constraint firstAttribute="trailing" secondItem="uHG-bL-N0I" secondAttribute="trailing" id="pHY-oG-3XX"/>
+                            <constraint firstItem="uHG-bL-N0I" firstAttribute="top" secondItem="mN7-vR-cyd" secondAttribute="bottom" id="sVw-qe-4b8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Log" id="vKn-9R-Okh">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="hpE-qj-pZO">
+                            <connections>
+                                <action selector="tapOnDelete:" destination="rHN-ea-Ea8" id="rpZ-uv-Jhv"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="q5c-Ln-T7w">
+                            <connections>
+                                <action selector="tapOnRefresh:" destination="rHN-ea-Ea8" id="zE6-hm-hlF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="logWebView" destination="uHG-bL-N0I" id="Uvi-r8-6WY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D5q-pO-ppG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-444" y="-176.76161919040482"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TimerBackgroundTrial" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ViewController" storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="BGTImer_Loc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -78,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="332" y="-177"/>
         </scene>
     </scenes>
 </document>
