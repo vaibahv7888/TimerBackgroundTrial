@@ -12,6 +12,10 @@ import CoreLocation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    let backgroundTaskName = "backgroundTaskName"
+    var backgroundTaskId : UIBackgroundTaskIdentifier?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         TaskManager.shared.application(application, didFinishLaunchingWithOptions : launchOptions)
         return true
@@ -47,7 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: BackgroundFetch
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSLog("\(#function)")
-        performFetchOperation(completionHandler: completionHandler)
+        var fetchResult : UIBackgroundFetchResult = .newData
+
+        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: backgroundTaskName) {
+            print("Background task completed : \(self.backgroundTaskName)")
+            if nil != self.backgroundTaskId {
+                completionHandler(fetchResult)
+                UIApplication.shared.endBackgroundTask(self.backgroundTaskId!)
+            }
+        }
+        
+        performFetchOperation(apiCompletionHandler:{(apiFetchResult : UIBackgroundFetchResult) in
+            fetchResult = apiFetchResult
+        })
+
     }
 
 }

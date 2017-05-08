@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func performFetchOperation(completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+func performFetchOperation(apiCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     let urlSession = URLSession.shared
     
     let task : URLSessionDataTask = urlSession.dataTask(with: URL(string: "https://jsonplaceholder.typicode.com/posts/1")!) { (data, response, error) in
@@ -30,7 +30,7 @@ func performFetchOperation(completionHandler: @escaping (UIBackgroundFetchResult
             logData = logData + " | No data"
         }
         Logger.println(s: "\(getCurrentTime()) | \(logData)")
-        completionHandler(fetchResult)
+        apiCompletionHandler(fetchResult)
     }
     task.resume()
 
